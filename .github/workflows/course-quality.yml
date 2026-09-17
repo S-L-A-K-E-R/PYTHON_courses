@@ -46,7 +46,9 @@ jobs:
         run: >
           ruff check .
           --output-format=github
-          --select=E9,F63,F7,F82
+          # Ruff always reports syntax errors, even without a dedicated syntax selector.
+          # These Pyflakes rules focus the CI on likely real coding mistakes rather than style.
+          --select=F63,F7,F82
           --extend-exclude=COURSES/001_Intro/AP_LAB_001.ipynb
 
       - name: Check Python source syntax
