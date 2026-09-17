@@ -1,0 +1,73 @@
+name: Course quality checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: course-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  notebooks:
+    name: Validate Python course material
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "nbformat>=5.10,<6" "ruff>=0.12,<1"
+
+      - name: Validate notebook structure and assets
+        run: python .github/scripts/validate_notebooks.py
+
+      # IMPORTANT COURSE EXCEPTION:
+      # AP_LAB_001 intentionally contains broken Python code that students must diagnose
+      # and repair as part of the exercise. This should be the ONLY non-empty notebook
+      # excluded from Python error checking. If that exercise is ever redesigned, remove
+      # this exclusion so LAB 1 is checked like every other notebook.
+      #
+      # Empty .ipynb files are ALSO skipped here on purpose. The previous validation step
+      # already reports them as visible warnings; Ruff cannot parse a 0-byte notebook as
+      # valid Jupyter JSON, so letting Ruff inspect them would incorrectly turn that warning
+      # into a blocking error.
+      #
+      # Ruff always reports syntax errors, even without a dedicated syntax selector.
+      # These Pyflakes rules focus the CI on likely real coding mistakes rather than style.
+      - name: Check Python errors in notebooks and source files
+        shell: bash
+        run: |
+          mapfile -d '' RUFF_FILES < <(
+            find . -type f \
+              \( -name '*.py' -o \( -name '*.ipynb' ! -size 0 \) \) \
+              ! -path './COURSES/001_Intro/AP_LAB_001.ipynb' \
+              -print0
+          )
+
+          if (( ${#RUFF_FILES[@]} == 0 )); then
+            echo "No non-empty Python files or notebooks to check with Ruff."
+            exit 0
+          fi
+
+          ruff check "${RUFF_FILES[@]}" \
+            --output-format=github \
+            --select=F63,F7,F82
+
+      - name: Check Python source syntax
+        run: python -m compileall -q .
