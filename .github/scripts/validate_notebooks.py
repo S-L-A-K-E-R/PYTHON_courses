@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Quality checks for the Python course notebooks.
+"""Structural quality checks for the Python course notebooks.
 
-The checker deliberately validates notebooks without executing them: course material can
-contain exercises with intentional runtime errors that students are expected to fix.
+Python-specific errors are checked separately with Ruff in the GitHub Actions workflow.
+This script focuses on notebook integrity and repository-specific course checks.
 """
 
 from __future__ import annotations
 
-import ast
 import os
 import re
 import sys
@@ -15,20 +14,15 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 import nbformat
-from IPython.core.inputtransformer2 import TransformerManager
 from nbformat.validator import NotebookValidationError
 
 
 ROOT = Path(__file__).resolve().parents[2]
-ALLOWED_EMPTY_NOTEBOOKS = {
-    Path("COURSES/002_Getting-Started/AP_LAB_002.ipynb"),
-}
 
 MARKDOWN_IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)(?:\s+['\"][^'\"]*['\"])?\)")
 HTML_IMAGE_RE = re.compile(r"<img\b[^>]*\bsrc=['\"]([^'\"]+)['\"]", re.IGNORECASE)
 CONFLICT_RE = re.compile(r"^(?:<<<<<<< .+|>>>>>>> .+)$", re.MULTILINE)
 
-transformer = TransformerManager()
 failures: list[tuple[Path, str]] = []
 warnings: list[tuple[Path, str]] = []
 
@@ -104,13 +98,10 @@ def check_images(notebook: Path, markdown: str, cell_number: int) -> None:
 
 
 def check_notebook(path: Path) -> None:
-    rel = relative(path)
-
     if path.stat().st_size == 0:
-        if rel in ALLOWED_EMPTY_NOTEBOOKS:
-            warnings.append((path, "Empty notebook placeholder is currently allowed."))
-        else:
-            failures.append((path, "Notebook is empty (0 bytes)."))
+        # Empty .ipynb files are always invalid course material. Even unfinished labs
+        # should contain a valid notebook skeleton before being committed.
+        failures.append((path, "Notebook is empty (0 bytes)."))
         return
 
     try:
@@ -132,21 +123,6 @@ def check_notebook(path: Path) -> None:
 
         if cell.cell_type == "markdown":
             check_images(path, source, index)
-            continue
-
-        if cell.cell_type != "code" or not source.strip():
-            continue
-
-        try:
-            transformed = transformer.transform_cell(source)
-            ast.parse(transformed, filename=f"{rel.as_posix()}:cell-{index}")
-        except (SyntaxError, IndentationError) as exc:
-            location = f"line {exc.lineno}" if exc.lineno else "unknown line"
-            failures.append(
-                (path, f"Cell {index}: Python/IPython syntax error at {location}: {exc.msg}")
-            )
-        except Exception as exc:  # Defensive: malformed IPython syntax should still fail clearly.
-            failures.append((path, f"Cell {index}: could not parse code cell: {exc}"))
 
 
 def write_summary(notebooks: list[Path]) -> None:
@@ -155,7 +131,7 @@ def write_summary(notebooks: list[Path]) -> None:
         return
 
     with open(summary_path, "a", encoding="utf-8") as summary:
-        summary.write("## Course notebook quality check\n\n")
+        summary.write("## Course notebook structural checks\n\n")
         summary.write(f"- Notebooks discovered: **{len(notebooks)}**\n")
         summary.write(f"- Errors: **{len(failures)}**\n")
         summary.write(f"- Warnings: **{len(warnings)}**\n")
