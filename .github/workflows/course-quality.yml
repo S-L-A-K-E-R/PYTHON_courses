@@ -39,17 +39,35 @@ jobs:
 
       # IMPORTANT COURSE EXCEPTION:
       # AP_LAB_001 intentionally contains broken Python code that students must diagnose
-      # and repair as part of the exercise. This should be the ONLY notebook excluded
-      # from Python error checking. If that exercise is ever redesigned, remove this
-      # exclusion so LAB 1 is checked like every other notebook.
+      # and repair as part of the exercise. This should be the ONLY non-empty notebook
+      # excluded from Python error checking. If that exercise is ever redesigned, remove
+      # this exclusion so LAB 1 is checked like every other notebook.
+      #
+      # Empty .ipynb files are ALSO skipped here on purpose. The previous validation step
+      # already reports them as visible warnings; Ruff cannot parse a 0-byte notebook as
+      # valid Jupyter JSON, so letting Ruff inspect them would incorrectly turn that warning
+      # into a blocking error.
+      #
       # Ruff always reports syntax errors, even without a dedicated syntax selector.
       # These Pyflakes rules focus the CI on likely real coding mistakes rather than style.
       - name: Check Python errors in notebooks and source files
+        shell: bash
         run: |
-          ruff check . \
+          mapfile -d '' RUFF_FILES < <(
+            find . -type f \
+              \( -name '*.py' -o \( -name '*.ipynb' ! -size 0 \) \) \
+              ! -path './COURSES/001_Intro/AP_LAB_001.ipynb' \
+              -print0
+          )
+
+          if (( ${#RUFF_FILES[@]} == 0 )); then
+            echo "No non-empty Python files or notebooks to check with Ruff."
+            exit 0
+          fi
+
+          ruff check "${RUFF_FILES[@]}" \
             --output-format=github \
-            --select=F63,F7,F82 \
-            --extend-exclude=COURSES/001_Intro/AP_LAB_001.ipynb
+            --select=F63,F7,F82
 
       - name: Check Python source syntax
         run: python -m compileall -q .
