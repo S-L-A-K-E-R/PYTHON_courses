@@ -3,14 +3,16 @@
 
 ## 00 — Introduction to Python
 
-[ ] What is programming?\
-[ ] What is Python?\
-[x] Development environments and IDEs\
-[x] Notebooks and Google Colab\
-[x] Markdown Essentials\
-[x] Running basic Python code\
-[ ] Scripts, notebooks and interactive execution\
-[ ] The Python REPL
+OK!
+
+- [ ] What is programming?
+- [ ] What is Python?
+- [x] Development environments and IDEs
+- [x] Notebooks and Google Colab
+- [x] Markdown Essentials
+- [x] Running basic Python code
+- [ ] Scripts, notebooks and interactive execution
+- [ ] The Python REPL
 
 <br>
 
@@ -20,11 +22,11 @@
 
 ### First instructions
 
-[ ] `print()`\
-[ ] Values\
-[ ] Variables\
-[ ] Basic types\
-[ ] Comments
+- [ ] `print()`
+- [ ] Values
+- [ ] Variables
+- [ ] Basic types
+- [ ] Comments
 
 <br>
 
