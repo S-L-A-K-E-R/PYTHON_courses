@@ -29,13 +29,25 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install notebook validation dependencies
+      - name: Install validation dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "nbformat>=5.10,<6" "ipython>=9,<10"
+          python -m pip install "nbformat>=5.10,<6" "ruff>=0.12,<1"
 
-      - name: Validate course notebooks
+      - name: Validate notebook structure and assets
         run: python .github/scripts/validate_notebooks.py
+
+      # IMPORTANT COURSE EXCEPTION:
+      # AP_LAB_001 intentionally contains broken Python code that students must diagnose
+      # and repair as part of the exercise. This should be the ONLY notebook excluded
+      # from Python error checking. If that exercise is ever redesigned, remove this
+      # exclusion so LAB 1 is checked like every other notebook.
+      - name: Check Python errors in notebooks and source files
+        run: >
+          ruff check .
+          --output-format=github
+          --select=E9,F63,F7,F82
+          --extend-exclude=COURSES/001_Intro/AP_LAB_001.ipynb
 
       - name: Check Python source syntax
         run: python -m compileall -q .
