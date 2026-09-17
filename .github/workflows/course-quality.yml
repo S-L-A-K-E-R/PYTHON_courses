@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   notebooks:
-    name: Validate Jupyter notebooks
+    name: Validate Python course material
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -36,3 +36,6 @@ jobs:
 
       - name: Validate course notebooks
         run: python .github/scripts/validate_notebooks.py
+
+      - name: Check Python source syntax
+        run: python -m compileall -q .
