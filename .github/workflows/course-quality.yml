@@ -42,14 +42,14 @@ jobs:
       # and repair as part of the exercise. This should be the ONLY notebook excluded
       # from Python error checking. If that exercise is ever redesigned, remove this
       # exclusion so LAB 1 is checked like every other notebook.
+      # Ruff always reports syntax errors, even without a dedicated syntax selector.
+      # These Pyflakes rules focus the CI on likely real coding mistakes rather than style.
       - name: Check Python errors in notebooks and source files
-        run: >
-          ruff check .
-          --output-format=github
-          # Ruff always reports syntax errors, even without a dedicated syntax selector.
-          # These Pyflakes rules focus the CI on likely real coding mistakes rather than style.
-          --select=F63,F7,F82
-          --extend-exclude=COURSES/001_Intro/AP_LAB_001.ipynb
+        run: |
+          ruff check . \
+            --output-format=github \
+            --select=F63,F7,F82 \
+            --extend-exclude=COURSES/001_Intro/AP_LAB_001.ipynb
 
       - name: Check Python source syntax
         run: python -m compileall -q .
