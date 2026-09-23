@@ -1,13 +1,13 @@
 # Introduction to Google Colab
 
-Start here to get familiar with Google Colab before working on the Python course. Learn to use notebook cells, write Markdown, run Python code, and manage your runtime.
+Start <u>here</u> to get familiar with Google Colab before working on the Python course. Learn to use notebook cells, write Markdown, run Python code, and manage your runtime.
 
 ## Course materials
 
-- **Class 1 — Introduction to Google Colab:**\
+- **Class_01 - Introduction to Google Colab:**\
   [![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/S-L-A-K-E-R/PYTHON_courses/blob/main/COURSES/001_Intro/AP_CLASS_001.ipynb) *(click to open)*
   
-- **Lab 1 — Markdown & Basic Code:**\
+- **Lab_01 - Markdown & Basic Code:**\
   [![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/S-L-A-K-E-R/PYTHON_courses/blob/main/COURSES/001_Intro/AP_LAB_001.ipynb) *(click to open)*
 
 <br>
