@@ -1,4 +1,4 @@
-# Python — ECE Paris
+# Python - ECE Paris
 
 Welcome to the Python course repository for **ECE Paris Bachelor students**!
 
@@ -6,8 +6,8 @@ Here you'll find course materials, lab exercises, and the syllabus. We mainly us
 
 ## Course materials
 
-- **[Courses & Labs](COURSES/)** — Class notebooks and exercises, organized by chapter.
-- **[Syllabus](SYLLABUS/syllabus_2.0.md)** — Course topics and learning objectives.
+- **[Courses & Labs](COURSES/)** - Class notebooks and exercises, organized by chapter.
+- **[Syllabus](SYLLABUS/syllabus_2.0.md)** - Course topics and learning objectives.
 
 ## How to get started
 
