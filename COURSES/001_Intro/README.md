@@ -3,7 +3,6 @@
 Start here to get familiar with Google Colab before working on the Python course.\
 Learn to use notebook cells, write Markdown, run Python code, and manage your runtime.
 
-<br>
 
 ## Course materials
 
