@@ -2,14 +2,14 @@
 
 **Semester plan:** 20 hours remaining · 10 × 2-hour sessions  
 **Audience:** Students with previous C/programming experience, already taking a separate machine-learning course  
-**Environment:** Primarily Google Colab/Jupyter; desktop GUI work is optional and runs locally.  
+**Environment:** Primarily Google Colab/Jupyter, including hands-on scientific computing with SciPy.  
 **Approach:** About 20 minutes of explanation, 90 minutes of guided experimentation, and 10 minutes of review per session. The first session has a longer recap. 
 
 <br>
 
 ## Learning outcomes
 
-By the end of the semester, students should be able to write idiomatic Python, choose appropriate tools for working with data and images, understand the practical uses of basic OOP, use an HTTP API, and build and explain a small reusable application or analysis notebook. This course **does not teach machine learning**, which is covered separately.
+By the end of the semester, students should be able to write idiomatic Python, choose appropriate tools for working with data and images, understand the practical uses of basic OOP, use an HTTP API, apply introductory SciPy techniques, and build and explain a small reusable application or analysis notebook. This course **does not teach machine learning**, which is covered separately.
 
 <br>
 
@@ -25,12 +25,12 @@ By the end of the semester, students should be able to write idiomatic Python, c
 | 6 | **Computer Vision I** | Images as arrays, pixels, RGB/BGR, crop/resize/rotate, OpenCV | Create an image-manipulation notebook using provided images |
 | 7 | **Computer Vision II** | Grayscale, smoothing, thresholding, edges and contours | Count simple objects in synthetic images and explain failure cases |
 | 8 | **JSON and APIs** | `json`, HTTP GET, `requests`, timeouts, status codes, expected schema | Retrieve data from an API or provided offline response; turn it into a table or plot |
-| 9 | **Interactive interfaces** | Event-driven callbacks and controls using notebook widgets; optional local Tkinter extension | Add buttons, sliders or file selection controls to an earlier notebook |
-| 10 | **Mini-project studio** | Integration, testing, documentation and presenting findings | Finish and demonstrate a chosen Data / Vision / API+GUI project |
+| 9 | **SciPy introduction** | Scientific computing, interpolation, basic signal processing and useful numerical routines | Analyze simulated sensor data: interpolate missing readings and detect peaks |
+| 10 | **Mini-project studio** | Integration, testing, documentation and presenting findings | Finish and demonstrate a chosen Data / Vision / API+SciPy project |
 
 <br>
 
-**Flexibility:** After Session 1, poll students on Data, Vision, APIs, GUI and scientific computing. Keep Sessions 2–4 as a practical common foundation unless their ML course already covers those exact skills. Swap Session 9 for an introductory SciPy lab (signals, interpolation or optimization) if student interest supports it. Session 10 may double as final project work rather than a formal presentation session.
+**Flexibility:** After Session 1, poll students on Data, Vision, APIs and scientific computing. Keep Sessions 2–4 as a practical common foundation unless their ML course already covers those exact skills. Session 9 introduces SciPy through a manageable notebook lab; its emphasis may shift between interpolation and signal processing to suit student interest. Session 10 may double as final project work rather than a formal presentation session.
 
 <br>
 
@@ -76,6 +76,6 @@ OOP is useful for reading and working with Python libraries and for programs tha
 ## Project options
 
 
-Students choose one small project, 3 people together: **Data** (clean and visualize a dataset), **Vision** (an image-processing pipeline with a documented failure case), or **API + interface** (fetch/mock data and display it interactively). Reuse lab work rather than beginning from zero. One clear notebook, a few assertions and a short live demo or written reflection are sufficient.
+Students choose one small project, 3 people together: **Data** (clean and visualize a dataset), **Vision** (an image-processing pipeline with a documented failure case), or **API + SciPy** (fetch/mock sensor data, then interpolate or analyze the measurements). Reuse lab work rather than beginning from zero. One clear notebook, a few assertions and a short live demo or written reflection are sufficient.
 
 *(NOTE2SELF: not sure yet, in decision for this one. I might go with Vision only)*
