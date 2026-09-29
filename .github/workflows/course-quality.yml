@@ -56,7 +56,7 @@ jobs:
           mapfile -d '' RUFF_FILES < <(
             find . -type f \
               \( -name '*.py' -o \( -name '*.ipynb' ! -size 0 \) \) \
-              ! -path './COURSES/001_Intro/AP_LAB_001.ipynb' \
+              ! -path './COURSES/01_Intro/AP_LAB_001.ipynb' \
               -print0
           )
 
