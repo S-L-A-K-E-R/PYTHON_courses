@@ -7,10 +7,10 @@ Learn to use notebook cells, write Markdown, run Python code, and manage your ru
 ## Course materials
 
 - <ins>**Class_01</ins> - Introduction to Google Colab:**\
-  [![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/S-L-A-K-E-R/PYTHON_courses/blob/main/COURSES/001_Intro/AP_CLASS_001.ipynb) *(click to open)*
+  [![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/S-L-A-K-E-R/PYTHON_courses/blob/main/COURSES/01_Intro/AP_CLASS_001.ipynb) *(click to open)*
   
 - <ins>**Lab_01</ins> - Markdown & Basic Code:**\
-  [![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/S-L-A-K-E-R/PYTHON_courses/blob/main/COURSES/001_Intro/AP_LAB_001.ipynb) *(click to open)*
+  [![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/S-L-A-K-E-R/PYTHON_courses/blob/main/COURSES/01_Intro/AP_LAB_001.ipynb) *(click to open)*
 
 <br>
 
