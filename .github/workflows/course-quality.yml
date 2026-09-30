@@ -37,13 +37,17 @@ jobs:
       - name: Validate notebook structure and assets
         run: python .github/scripts/validate_notebooks.py
 
-      # IMPORTANT COURSE EXCEPTION:
-      # AP_LAB_001 intentionally contains broken Python code that students must diagnose
-      # and repair as part of the exercise. This should be the ONLY non-empty notebook
-      # excluded from Python error checking. If that exercise is ever redesigned, remove
-      # this exclusion so LAB 1 is checked like every other notebook.
+      # Every non-empty notebook is checked with Ruff.
+      # Before Ruff runs, explicitly tagged code cells are neutralized in the temporary
+      # GitHub Actions checkout only. A cell is ignored when ANY standalone comment line
+      # inside that cell contains the exact marker "(#GA-IC)".
       #
-      # Empty .ipynb files are ALSO skipped here on purpose. The previous validation step
+      # The entire cell is scanned first, so the marker may safely be placed at the very
+      # end of a deliberately invalid cell, even when the broken code appears above it.
+      - name: Ignore explicitly tagged notebook cells
+        run: python .github/scripts/prepare_notebooks_for_ruff.py
+
+      # Empty .ipynb files are skipped here on purpose. The previous validation step
       # already reports them as visible warnings; Ruff cannot parse a 0-byte notebook as
       # valid Jupyter JSON, so letting Ruff inspect them would incorrectly turn that warning
       # into a blocking error.
@@ -56,7 +60,6 @@ jobs:
           mapfile -d '' RUFF_FILES < <(
             find . -type f \
               \( -name '*.py' -o \( -name '*.ipynb' ! -size 0 \) \) \
-              ! -path './COURSES/01_Intro/AP_LAB_001.ipynb' \
               -print0
           )
 

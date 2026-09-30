@@ -8,6 +8,8 @@ Every update automatically checks the course files:
 - 🔀 **Git conflicts** — detects forgotten merge-conflict markers.
 - 📄 **Python files** — checks regular `.py` files too.
 - ⚠️ **Empty notebooks** — shown as a warning, but do not fail the checks.
+- 🏷️ **Intentional error cells** — a code cell containing a comment line with `(#GA-IC)` is skipped by the Python-error check; the rest of the notebook is still checked.
 
-> **Exception:** `AP_LAB_001.ipynb` contains intentional errors for students to fix,  
-> so its Python code is not checked.
+> To ignore a deliberately invalid code cell, add the exact marker `(#GA-IC)` on a standalone Python comment line beginning with `#`.
+>
+> The marker may be anywhere in the cell — including at the very end after invalid code — because CI scans the entire cell before Ruff runs.
