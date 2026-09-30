@@ -22,5 +22,10 @@ Here you'll find course materials, lab exercises, and the syllabus. We mainly us
 
 <br>
 
+## Repo activity
+
+![Alt](https://repobeats.axiom.co/api/embed/d890a645cdce6a0ebbdbccfd805cb441b1eb5fb1.svg "Repobeats analytics image")
+
+
 > [!TIP]
 > Before submitting a lab, restart your Colab runtime and run all cells from top to bottom to check that everything works.
