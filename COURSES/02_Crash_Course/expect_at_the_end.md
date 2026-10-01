@@ -1,7 +1,7 @@
 
-# END — What should you be comfortable with now?
+# END — Complete checklist for Crash Course
 
-Before moving to NumPy, make sure the following doesn't look mysterious anymore:
+What we have to check before moving to NumPy.
 
 - [ ] basic Python values and dynamic typing;
 - [ ] arithmetic and comparisons;
@@ -21,8 +21,4 @@ Before moving to NumPy, make sure the following doesn't look mysterious anymore:
 - [ ] list comprehensions;
 - [ ] basic file reading/writing;
 - [ ] simple exceptions;
-- [ ] `assert`.
-
-You do **not** need to memorize every method or every function.
-
-What matters is knowing what Python can do — and being able to find the exact syntax when you need it.
+- [ ] `assert` (??)
